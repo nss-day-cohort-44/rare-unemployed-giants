@@ -1,5 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { CategoryProvider } from "./categories/CategoryProvider.js"
+import { CategoryList } from "./categories/CategoryList.js"
 
 export const ApplicationViews = () => {
     return <>

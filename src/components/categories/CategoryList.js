@@ -13,8 +13,8 @@ export const CategoryList = () => {
         <div style={{ margin: "0rem 3rem"}}>
             <h1>Categories</h1>
             <article className="categories">
-                        return <section key={category.id} className="card category">
-                            <h2>{Category.name}</h2>
+                        return <section key={categories.id} className="card category">
+                            <h2>{categories.label}</h2>
                         </section>
             </article>
         </div>
