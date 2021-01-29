@@ -31,12 +31,12 @@ export const PostForm = (props) => {
     const categoryId = parseInt(categories.id);
     createPost({
       userId: parseInt(localStorage.getItem("rare_user_id")),
-      category: categoryId,
+      categoryId: categoryId,
       title: post.title,
-      publicationDate: HumanDate,
+      publicationDate: "2021-01-29 09:19:32.619755",
       content: post.content,
-      approved: post.approved,
       imageUrl: post.imageUrl,
+      approved: 1,
     }).then(() => props.history.push("/posts"));
   };
 
