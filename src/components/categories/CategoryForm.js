@@ -4,13 +4,10 @@ PURPOSE: This module is responsible for presenting the client with a form so
 that they can add a new category to the database via DOM interaction.
 */
 
-import React, { useContext, useEffect, useRef } from "react"
-import { Link } from "react-router-dom"
-import { CategoryContext } from "./CategoryProvider";
+import React, { useRef } from "react"
 import "./CategoryForm.css"
 
 export const CategoryForm = (props) => {
-    const { categories, getCategories } = useContext(CategoryContext)
 
     const categoryLabel = useRef()
 
