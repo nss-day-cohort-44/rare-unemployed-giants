@@ -5,6 +5,7 @@ import { CategoryList } from "./categories/CategoryList.js"
 import { CategoryForm } from "./categories/CategoryForm.js"
 import { TagProvider } from "./tags/TagProvider.js"
 import { TagList } from "./tags/TagList.js"
+import { TagForm } from "./tags/TagForm.js"
 
 export const ApplicationViews = () => {
     return <>
@@ -25,6 +26,10 @@ export const ApplicationViews = () => {
             <TagProvider>
                 <Route exact path="/tags" render={
                     props => <TagList {...props} />
+                } />
+
+                <Route path="/tags/form" render={
+                    props => <TagForm {...props} />
                 } />
             </TagProvider>
         </main>

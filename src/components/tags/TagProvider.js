@@ -18,6 +18,13 @@ export const TagProvider = (props) => {
             .then(setTags)
     }
 
+    const deleteTag = (tagId) => {
+        return fetch(`http://localhost:8088/tags/${tagId}`, {
+            method: "Delete"
+        })
+            .then(getTags)
+    }
+
     /*
         You return a context provider which has the
         `Tages` state, the `addTag` function,
@@ -26,7 +33,7 @@ export const TagProvider = (props) => {
     */
     return (
         <TagContext.Provider value={{
-            tags, getTags
+            tags, getTags, deleteTag
         }}>
             {props.children}
         </TagContext.Provider>
