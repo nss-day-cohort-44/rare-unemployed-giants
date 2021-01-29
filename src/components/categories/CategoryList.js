@@ -10,13 +10,19 @@ export const CategoryList = () => {
     }, [])
 
     return (
-        <div style={{ margin: "0rem 3rem"}}>
-            <h1>Categories</h1>
-            <article className="categories">
-                        return <section key={categories.id} className="card category">
-                            <h2>{categories.label}</h2>
-                        </section>
-            </article>
-        </div>
+        <article className="categories">
+            <div style={{ margin: "0rem 3rem"}}>
+                <h1>Categories</h1>
+                {
+                    categories.map(category => {
+                        return(
+                            <section key={category.id} className="category">
+                                <h2>{category.label}</h2>
+                            </section>
+                        )
+                    }
+                    )}
+            </div>
+        </article>
     )
 }
