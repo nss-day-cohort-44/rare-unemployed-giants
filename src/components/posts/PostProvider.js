@@ -15,7 +15,7 @@ export const PostProvider = (props) => {
     return fetch(`http://localhost:8088/posts/${id}`).then((res) => res.json());
   };
 
-  const addPost = (post) => {
+  const createPost = (post) => {
     return fetch("http://localhost:8088/posts", {
       method: "POST",
       headers: {
@@ -29,7 +29,7 @@ export const PostProvider = (props) => {
     <PostContext.Provider
       value={{
         posts,
-        addPost,
+        createPost,
         getPostById,
         getPosts,
       }}
