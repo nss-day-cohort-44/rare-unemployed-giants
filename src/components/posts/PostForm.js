@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "./PostProvider";
-import { ProfileContext } from "./auth/AuthProvider";
+import { userContext } from "./users/UserContext";
 
 export const PostForm = (props) => {
   const { posts, createPost, getPosts } = useContext(PostContext);
-  const { profile, getProfile } = useContext(ProfileContext);
+  const { user, getUserById } = useContext(userContext);
   const [post, setPost] = useState({});
 
   const handleControlledInputChange = (event) => {
@@ -20,4 +20,6 @@ export const PostForm = (props) => {
   useEffect(() => {
     getPosts();
   }, []);
+
+  const createNewPost = () => {};
 };
