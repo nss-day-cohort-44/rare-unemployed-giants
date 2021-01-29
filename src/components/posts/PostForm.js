@@ -91,7 +91,7 @@ export const PostForm = (props) => {
         <div className="form-group">
           <label htmlFor="imageUrl">Image: </label>
           <input
-            type="image"
+            type="text"
             name="imageUrl"
             className="form-control"
             value={post.imageUrl}
