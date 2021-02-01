@@ -35,11 +35,11 @@ export const PostDetail = (props) => {
         <div style={{ margin: "0rem 3rem" }}>
             <h1>Post Details</h1>
 
-            <p>{post.title}</p>
-            <p>{post.imageUrl}</p>
-            <p>{post.content}</p>
-            <p>{post.publicationDate}</p>
-            <p>{post.author}</p>
+            <p>Title: {post.title}</p>
+            <p>Image URL: {post.imageUrl}</p>
+            <p>Content: {post.content}</p>
+            <p>Publication Date: {post.publicationDate}</p>
+            <p>Author: {post.author}</p>
 
             <button onClick={() => {
                 confirmDelete()
