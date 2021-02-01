@@ -34,7 +34,7 @@ export const NavBar = () => {
         </Link>
       </li>
       <li className="navbar__item">
-        <Link className="navbar__link" to={}>
+        <Link className="navbar__link" to={`/myposts/${user}`}>
           My Posts
         </Link>
       </li>

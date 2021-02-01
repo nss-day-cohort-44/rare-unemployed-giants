@@ -26,9 +26,17 @@ export const PostProvider = (props) => {
   };
 
   const getPostsByUser = (user) => {
-    return fetch(
-      `http://localhost:8088/posts/${user}?_expand=user`
-    ).then((res) => res.json());
+    return fetch(`http://localhost:8088/posts?user_id=${user}`)
+      .then((res) => res.json())
+      .then(setPosts);
+  };
+
+  const deletePost = (id) => {
+    return fetch(`http://localhost:8088/posts/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(getPosts);
   };
 
   return (
@@ -39,6 +47,7 @@ export const PostProvider = (props) => {
         getPostById,
         getPosts,
         getPostsByUser,
+        deletePost,
       }}
     >
       {props.children}
