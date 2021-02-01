@@ -10,6 +10,7 @@ import { PostProvider } from "./posts/PostProvider.js";
 import { UserProvider } from "./users/UserProvider";
 import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList.js";
+import { PostDetail } from "./posts/PostDetail.js";
 
 
 export const ApplicationViews = () => {
@@ -22,43 +23,57 @@ export const ApplicationViews = () => {
         }}
       >
         <CategoryProvider>
+          {/* Category List View */}
           <Route
             exact
             path="/categories"
             render={(props) => <CategoryList {...props} />}
           />
 
+          {/* Category Form View */}
           <Route
             exact
             path="/categories/form"
             render={(props) => <CategoryForm {...props} />}
           />
         </CategoryProvider>
+
         <TagProvider>
+          {/* Tag List View */}
           <Route
             exact
             path="/tags"
             render={(props) => <TagList {...props} />}
           />
 
-          <Route 
-            path="/tags/form" 
-            render={props => <TagForm {...props} />} 
-          />          
+          <Route
+            path="/tags/form"
+            render={props => <TagForm {...props} />}
+          />
         </TagProvider>
+
         <PostProvider>
           <CategoryProvider>
             <UserProvider>
+              {/* Post Form View */}
               <Route
                 exact
                 path="/posts/create"
                 render={(props) => <PostForm {...props} />}
               />
+
+              {/* Post List View */}
               <Route
                 exact
                 path="/"
                 render={(props) => <PostList {...props} />}
               />
+
+              {/* Post Details View */}
+              <Route exact path="/posts/:postId(\d+)" render={
+                props => <PostDetail{...props} />
+              } />
+
             </UserProvider>
           </CategoryProvider>
         </PostProvider>
