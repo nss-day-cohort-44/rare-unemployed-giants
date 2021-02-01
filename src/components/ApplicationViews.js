@@ -5,10 +5,13 @@ import { CategoryList } from "./categories/CategoryList.js";
 import { CategoryForm } from "./categories/CategoryForm.js";
 import { TagProvider } from "./tags/TagProvider.js";
 import { TagList } from "./tags/TagList.js";
+import { TagForm } from "./tags/TagForm.js"
 import { PostProvider } from "./posts/PostProvider.js";
 import { UserProvider } from "./users/UserProvider";
 import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList.js";
+
+
 export const ApplicationViews = () => {
   return (
     <>
@@ -31,13 +34,17 @@ export const ApplicationViews = () => {
             render={(props) => <CategoryForm {...props} />}
           />
         </CategoryProvider>
-
         <TagProvider>
           <Route
             exact
             path="/tags"
             render={(props) => <TagList {...props} />}
           />
+
+          <Route 
+            path="/tags/form" 
+            render={props => <TagForm {...props} />} 
+          />          
         </TagProvider>
         <PostProvider>
           <CategoryProvider>
