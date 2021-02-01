@@ -7,7 +7,7 @@ import React, { useState } from "react"
 export const CategoryContext = React.createContext()
 
 /*
- This component establishes what data can be used.
+This component establishes what data can be used.
  */
 export const CategoryProvider = (props) => {
     const [categories, setCategories] = useState([])
@@ -18,6 +18,13 @@ export const CategoryProvider = (props) => {
             .then(setCategories)
     }
 
+    const deleteCategory = (categoryId) => {
+        return fetch(`http://localhost:8088/categories/${categoryId}`, {
+            method: "Delete"
+        })
+            .then(getCategories)
+    }
+
     /*
         You return a context provider which has the
         `categories` state, the `addCategory` function,
@@ -26,7 +33,7 @@ export const CategoryProvider = (props) => {
     */
     return (
         <CategoryContext.Provider value={{
-            categories, getCategories
+            categories, getCategories, deleteCategory
         }}>
             {props.children}
         </CategoryContext.Provider>

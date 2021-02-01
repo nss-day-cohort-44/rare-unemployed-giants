@@ -24,7 +24,7 @@ export const TagList = (props) => {
                         return(
                             <section key={tag.id} className="tag">
                                 <h2>{tag.label}</h2>
-                                <button onClick={() => deleteTag(tag.id).then(() => props.history.push("/tags"))} >
+                                <button onClick={() => deleteTag(tag.id).then(() => props.history.push("/"))} >
                                     BEGONE TAG
                                 </button>
                             </section>

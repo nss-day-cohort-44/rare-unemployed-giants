@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import { CategoryContext } from "./CategoryProvider";
 import "./Category.css"
 
-export const CategoryList = () => {
-    const { categories, getCategories } = useContext(CategoryContext)
+export const CategoryList = (props) => {
+    const { categories, getCategories, deleteCategory } = useContext(CategoryContext)
 
     useEffect(() => {
         getCategories()
@@ -24,6 +24,9 @@ export const CategoryList = () => {
                         return (
                             <section key={category.id} className="category">
                                 <h2>{category.label}</h2>
+                                <button onClick={() => deleteCategory(category.id).then(() => props.history.push("/"))} >
+                                    BEGONE CATEGORY
+                                </button>
                             </section>
                         )
                     }
