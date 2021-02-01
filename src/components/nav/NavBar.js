@@ -3,6 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
 
+const user = localStorage.getItem("rare_user_id");
+
 export const NavBar = () => {
   const history = useHistory();
 
@@ -32,7 +34,7 @@ export const NavBar = () => {
         </Link>
       </li>
       <li className="navbar__item">
-        <Link className="navbar__link" to="/posts/:user(\d+)">
+        <Link className="navbar__link" to={}>
           My Posts
         </Link>
       </li>

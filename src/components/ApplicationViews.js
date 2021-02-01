@@ -57,7 +57,7 @@ export const ApplicationViews = () => {
               />
               <Route
                 exact
-                path="/posts/:user(\d+)"
+                path="/posts/:user_id(\d+)"
                 render={(props) => <PostList {...props} />}
               />
             </UserProvider>
