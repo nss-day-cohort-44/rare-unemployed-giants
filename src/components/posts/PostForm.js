@@ -6,7 +6,7 @@ import { HumanDate } from "../utils/HumanDate.js";
 
 export const PostForm = (props) => {
   const { posts, createPost, getPosts } = useContext(PostContext);
-  const { user, getUserById } = useContext(UserContext);
+  // const { user, getUserById } = useContext(UserContext);
   const { categories, getCategories } = useContext(CategoryContext);
   const [post, setPost] = useState({});
 
@@ -27,6 +27,7 @@ export const PostForm = (props) => {
     getPosts();
   }, []);
 
+  const user = parseInt(localStorage.getItem("rare_user_id"));
   const createNewPost = () => {
     const categoryId = parseInt(categories.id);
     createPost({
@@ -37,7 +38,7 @@ export const PostForm = (props) => {
       content: post.content,
       image_url: post.imageUrl,
       approved: 1,
-    }).then(() => props.history.push("/posts"));
+    }).then(() => props.history.push(`/myposts/${user}`));
   };
 
   return (
