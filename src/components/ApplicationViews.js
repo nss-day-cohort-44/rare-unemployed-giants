@@ -9,6 +9,8 @@ import { TagForm } from "./tags/TagForm.js"
 import { PostProvider } from "./posts/PostProvider.js";
 import { UserProvider } from "./users/UserProvider";
 import { PostForm } from "./posts/PostForm";
+import { PostList } from "./posts/PostList.js";
+
 
 export const ApplicationViews = () => {
   return (
@@ -51,6 +53,11 @@ export const ApplicationViews = () => {
                 exact
                 path="/posts/create"
                 render={(props) => <PostForm {...props} />}
+              />
+              <Route
+                exact
+                path="/"
+                render={(props) => <PostList {...props} />}
               />
             </UserProvider>
           </CategoryProvider>
