@@ -10,7 +10,10 @@ export const PostDetail = (props) => {
 
     const [post, setPost] = useState({});
 
-    // Find the post whose id matches the id in the URL bar, and then set that post to state.
+    // Defines current user, used for user-specific data
+    const currentUser = +(localStorage.getItem("rare_user_id"))
+
+    // Find the post whose id matches the id in the URL bar, and then set that post to state
     useEffect(() => {
         getPostById(props.match.params.postId).then((post) => setPost(post))
     }, [])
@@ -22,8 +25,8 @@ export const PostDetail = (props) => {
         let userConfirmed = window.confirm("You are about to delete your post!\nIf you are sure you want to continue, click \"Ok\".");
 
         if (userConfirmed) {
-            // After confirmation, delete from database and redirect to <PostList>
-            deletePost(post.id)    // pass in props.history.id OR post.id or something?
+            // After confirmation, delete from database and redirect to PostList view
+            deletePost(post.id)
             props.history.push('/')
         }
         else {
@@ -35,16 +38,42 @@ export const PostDetail = (props) => {
         <div style={{ margin: "0rem 3rem" }}>
             <h1>Post Details</h1>
 
-            <p>Title: {post.title}</p>
-            <p>Image URL: {post.imageUrl}</p>
-            <p>Content: {post.content}</p>
-            <p>Publication Date: {post.publicationDate}</p>
-            <p>Author: {post.author}</p>
+            {/* 
+                Ternary operator (fancy if statement).
 
-            <button onClick={() => {
-                confirmDelete()
-            }}> Delete Post </button>
+                If the userId of the logged in user matches
+                the postId (meaning that the logged in user
+                created the post), render details WITH the
+                "Delete Post" button.
+            */}
+            {currentUser === post.userId ? (
+                <>
+                    <p>Title: {post.title}</p>
+                    <p>Image URL: {post.imageUrl}</p>
+                    <p>Content: {post.content}</p>
+                    <p>Publication Date: {post.publicationDate}</p>
+                    <p>Author: {post.author}</p>
 
+                    <button onClick={() => {
+                        confirmDelete()
+                    }}> Delete Post </button>
+                </>
+            ) :
+                /* 
+                    Otherwise render everything BESIDES the "Delete Post"
+                    button (logged in user did not create the post, thus
+                    they should not be able to delete it.
+                */
+                (
+                    <>
+                        <p>Title: {post.title}</p>
+                        <p>Image URL: {post.imageUrl}</p>
+                        <p>Content: {post.content}</p>
+                        <p>Publication Date: {post.publicationDate}</p>
+                        <p>Author: {post.author}</p>
+                    </>
+                )
+            }
         </div>
     )
 }
