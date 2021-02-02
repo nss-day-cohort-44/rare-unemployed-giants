@@ -3,10 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
 
-const user = localStorage.getItem("rare_user_id");
-
 export const NavBar = () => {
   const history = useHistory();
+  const user = localStorage.getItem("rare_user_id");
 
   return (
     <ul className="navbar">
