@@ -15,7 +15,7 @@ export const CommentProvider = (props) => {
     const getComments = () => {
         return fetch("http://localhost:8088/comments")
             .then(res => res.json())
-            .then(setCategories)
+            .then(setComments)
     }
 
     const createComment = (post) => {
