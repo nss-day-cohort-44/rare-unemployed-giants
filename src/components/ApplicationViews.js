@@ -13,6 +13,7 @@ import { PostList } from "./posts/PostList.js";
 import { PostDetail } from "./posts/PostDetail.js";
 import { CommentList } from "./comments/CommentList"
 import { CommentProvider } from "./comments/CommentProvider"
+import { CommentForm } from "./comments/CommentForm"
 
 
 export const ApplicationViews = () => {
@@ -76,9 +77,14 @@ export const ApplicationViews = () => {
                 props => <PostDetail {...props} />
               } />
               <CommentProvider>
+
                 {/* View Comments */}
-                <Route exact path="/comments/:commments(\d+)" render={
+                <Route exact path="/comments/:comments(\d+)" render={
                   props => <CommentList {...props} />
+                } />
+
+                <Route exact path="/commentForm/:comments(\d+)" render={
+                  props => <CommentForm {...props} />
                 } />
               </CommentProvider>
             </UserProvider>

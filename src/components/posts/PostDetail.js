@@ -49,10 +49,11 @@ export const PostDetail = (props) => {
                 confirmDelete()
             }}> Delete Post </button>
 
-            <button onClick={() => {
-                seeComments()
-            }}> View Comments </button>
+            <button onClick={seeComments}> View Comments </button>
 
+            <button onClick={() => {
+                props.history.push(`/commentForm/${props.match.params.postId}`)
+            }}> Make Comment </button>
         </div>
     )
 }
