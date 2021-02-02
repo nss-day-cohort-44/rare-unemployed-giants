@@ -24,7 +24,8 @@ export const CommentList = props => {
             <div className="comments">
                 {postComments.map(comment => {
                     const author = users.find(user => user.id === comment.author_id)
-                    return (<Comment key={comment.id} id={comment.id} author={author.username} body={comment.content} time={HumanDate(comment.time)}></Comment>)
+                    return (<Comment key={comment.id} id={comment.id} author={author.username} authorId={author.id} body={comment.content} time={HumanDate(comment.time)}></Comment>)
+
                 })
                 }
             </div>
