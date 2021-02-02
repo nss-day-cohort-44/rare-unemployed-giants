@@ -5,13 +5,12 @@ import { CategoryList } from "./categories/CategoryList.js";
 import { CategoryForm } from "./categories/CategoryForm.js";
 import { TagProvider } from "./tags/TagProvider.js";
 import { TagList } from "./tags/TagList.js";
-import { TagForm } from "./tags/TagForm.js"
+import { TagForm } from "./tags/TagForm.js";
 import { PostProvider } from "./posts/PostProvider.js";
 import { UserProvider } from "./users/UserProvider";
 import { PostForm } from "./posts/PostForm";
 import { PostList } from "./posts/PostList.js";
 import { PostDetail } from "./posts/PostDetail.js";
-
 
 export const ApplicationViews = () => {
   return (
@@ -46,10 +45,7 @@ export const ApplicationViews = () => {
             render={(props) => <TagList {...props} />}
           />
 
-          <Route
-            path="/tags/form"
-            render={props => <TagForm {...props} />}
-          />
+          <Route path="/tags/form" render={(props) => <TagForm {...props} />} />
         </TagProvider>
 
         <PostProvider>
@@ -68,12 +64,18 @@ export const ApplicationViews = () => {
                 path="/"
                 render={(props) => <PostList {...props} />}
               />
+              <Route
+                exact
+                path="/myposts/:user_id(\d+)"
+                render={(props) => <PostList {...props} />}
+              />
 
               {/* Post Details View */}
-              <Route exact path="/posts/:postId(\d+)" render={
-                props => <PostDetail{...props} />
-              } />
-
+              <Route
+                exact
+                path="/posts/:postId(\d+)"
+                render={(props) => <PostDetail {...props} />}
+              />
             </UserProvider>
           </CategoryProvider>
         </PostProvider>
