@@ -12,11 +12,11 @@ export const CategoryList = (props) => {
     }, [])
 
     const verifyDelete = (category) => {
-        let selectChoice = window.confirm(`Are you sure you want to delete the ${category.label}?`)    
+        let selectChoice = window.confirm(`Are you sure you want to delete the ${category.label} tag?`)    
 
         if (selectChoice) {
             deleteCategory(category.id);
-            props.history.push('/')
+            props.history.push('/categories')
         }
         else {
              // Pass
