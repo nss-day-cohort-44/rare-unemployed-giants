@@ -18,10 +18,8 @@ export const Register = (props) => {
         return fetch(`http://127.0.0.1:8088/users?email=${email.current.value}`)
             .then(_ => _.json())
             .then((user) => {
-                if (user.hasOwnProperty("email"))
-                {return true}
-                else 
-                {return false}
+                if (user.email != "") { return true }
+                else { return false }
             })
     }
 
@@ -54,15 +52,15 @@ export const Register = (props) => {
                                     localStorage.setItem("rare_user_id", parseInt(res.id))
                                     history.push("/")
                                 }
+                            })
+                    }
+                    else {
+                        conflictDialog.current.showModal()
+                    }
                 })
-        } 
-        else {
-            conflictDialog.current.showModal()
+        } else {
+            passwordDialog.current.showModal()
         }
-        })
-    } else {
-        passwordDialog.current.showModal()
-    }
     }
 
     return (
