@@ -72,11 +72,6 @@ export const ApplicationViews = () => {
                 path="/myposts/:user_id(\d+)"
                 render={(props) => <PostList {...props} />}
               />
-
-              {/* Post Details View */}
-              <Route exact path="/posts/:postId(\d+)" render={
-                props => <PostDetail {...props} />
-              } />
               <CommentProvider>
 
                 {/* View Comments */}

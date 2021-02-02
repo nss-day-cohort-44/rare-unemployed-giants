@@ -41,48 +41,23 @@ export const PostDetail = (props) => {
     return (
         <div style={{ margin: "0rem 3rem" }}>
             <h1>Post Details</h1>
+            <>
+                <p>Title: {post.title}</p>
+                <p>Image URL: {post.imageUrl}</p>
+                <p>Content: {post.content}</p>
+                <p>Publication Date: {post.publicationDate}</p>
+                <p>Author: {post.author}</p>
+                <button onClick={seeComments}> View Comments </button>
 
-            {/* 
-                Ternary operator (fancy if statement).
+                <button onClick={() => {
+                    props.history.push(`/commentForm/${props.match.params.postId}`)
+                }}> Make Comment </button>
 
-                If the userId of the logged in user matches
-                the postId (meaning that the logged in user
-                created the post), render details WITH the
-                "Delete Post" button.
-            */}
-            {currentUser === post.userId ? (
-                <>
-                    <p>Title: {post.title}</p>
-                    <p>Image URL: {post.imageUrl}</p>
-                    <p>Content: {post.content}</p>
-                    <p>Publication Date: {post.publicationDate}</p>
-                    <p>Author: {post.author}</p>
+                {currentUser === post.userId ? <button onClick={() => {
+                    confirmDelete()
+                }}> Delete Post </button> : ""}
 
-            <button onClick={seeComments}> View Comments </button>
-
-            <button onClick={() => {
-                props.history.push(`/commentForm/${props.match.params.postId}`)
-            }}> Make Comment </button>
-                    <button onClick={() => {
-                        confirmDelete()
-                    }}> Delete Post </button>
-                </>
-            ) :
-                /* 
-                    Otherwise render everything BESIDES the "Delete Post"
-                    button (logged in user did not create the post, thus
-                    they should not be able to delete it.
-                */
-                (
-                    <>
-                        <p>Title: {post.title}</p>
-                        <p>Image URL: {post.imageUrl}</p>
-                        <p>Content: {post.content}</p>
-                        <p>Publication Date: {post.publicationDate}</p>
-                        <p>Author: {post.author}</p>
-                    </>
-                )
-            }
+            </>
         </div>
     )
 }
