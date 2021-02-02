@@ -1,14 +1,29 @@
 import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { TagContext } from "./TagProvider";
+import { useHistory } from "react-router-dom"
 import "./Tag.css"
 
 export const TagList = (props) => {
     const { tags, getTags, deleteTag } = useContext(TagContext)
+    const { history } = useHistory();
 
     useEffect(() => {
         getTags()
     }, [])
+
+    const handleDelete = (tag) => {
+        let userChoice = window.confirm(`Are you sure you want to delete the ${tag.label} tag?`)
+
+        if (userChoice) {
+            deleteTag(tag.id)
+            props.history.push(`/`)
+        }
+        else {
+            // Pass
+        }
+    }
+
 
     return (
         <article className="tags">
@@ -24,8 +39,8 @@ export const TagList = (props) => {
                         return(
                             <section key={tag.id} className="tag">
                                 <h2>{tag.label}</h2>
-                                <button onClick={() => deleteTag(tag.id).then(() => props.history.push("/tags"))} >
-                                    BEGONE TAG
+                                <button onClick={() => {handleDelete(tag) }} >
+                                    Delete Tag
                                 </button>
                             </section>
                         )
