@@ -18,6 +18,24 @@ export const CommentProvider = (props) => {
             .then(setCategories)
     }
 
+    const createComment = (post) => {
+        return fetch("http://localhost:8088/comments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(post),
+        }).then(getComments);
+      };
+
+    const deleteComment = (id) => {
+        return fetch(`http://localhost:8088/comments/${id}`, {
+          method: "DELETE",
+        })
+          .then(res => res.json())
+          .then(getComments)
+      };
+
     /*
         You return a context provider which has the
         `categories` state, the `addCategory` function,

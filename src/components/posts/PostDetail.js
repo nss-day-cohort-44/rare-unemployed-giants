@@ -31,6 +31,10 @@ export const PostDetail = (props) => {
         }
     }
 
+    const seeComments = () => {
+        props.history.push(`/comments/${props.match.params.postId}`)
+    }
+
     return (
         <div style={{ margin: "0rem 3rem" }}>
             <h1>Post Details</h1>
@@ -44,6 +48,10 @@ export const PostDetail = (props) => {
             <button onClick={() => {
                 confirmDelete()
             }}> Delete Post </button>
+
+            <button onClick={() => {
+                seeComments()
+            }}> View Comments </button>
 
         </div>
     )
