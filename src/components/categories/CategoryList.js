@@ -1,14 +1,27 @@
-import React, { useContext, useEffect } from "react"
-import { Link } from "react-router-dom"
+import React, { useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { CategoryContext } from "./CategoryProvider";
 import "./Category.css"
 
 export const CategoryList = (props) => {
     const { categories, getCategories, deleteCategory } = useContext(CategoryContext)
+    const { history } = useHistory();
 
     useEffect(() => {
         getCategories()
     }, [])
+
+    const verifyDelete = (category) => {
+        let selectChoice = window.confirm(`Are you sure you want to delete the ${category.label}?`)    
+
+        if (selectChoice) {
+            deleteCategory(category.id);
+            props.history.push('/')
+        }
+        else {
+             // Pass
+        }
+    }
 
     return (
         <article className="categories">
@@ -24,8 +37,8 @@ export const CategoryList = (props) => {
                         return (
                             <section key={category.id} className="category">
                                 <h2>{category.label}</h2>
-                                <button onClick={() => deleteCategory(category.id).then(() => props.history.push("/"))} >
-                                    BEGONE CATEGORY
+                                <button onClick={(e) => { verifyDelete(category) }} >
+                                    Delete Category
                                 </button>
                             </section>
                         )
