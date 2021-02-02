@@ -10,38 +10,59 @@ export const Register = (props) => {
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
+    const conflictDialog = useRef()
     const history = useHistory()
+
+    const existingUserCheck = () => {
+        // If your json-server URL is different, please change it below!
+        return fetch(`http://127.0.0.1:8088/users?email=${email.current.value}`)
+            .then(_ => _.json())
+            .then((user) => {
+                if (user.hasOwnProperty("email"))
+                {return true}
+                else 
+                {return false}
+            })
+    }
 
     const handleRegister = (e) => {
         e.preventDefault()
 
         if (password.current.value === verifyPassword.current.value) {
-            const newUser = {
-                "username": email.current.value,
-                "first_name": firstName.current.value,
-                "last_name": lastName.current.value,
-                "email": email.current.value,
-                "password": password.current.value
-            }
+            existingUserCheck()
+                .then((userExists) => {
+                    if (!userExists) {
+                        const newUser = {
+                            "username": email.current.value,
+                            "first_name": firstName.current.value,
+                            "last_name": lastName.current.value,
+                            "email": email.current.value,
+                            "password": password.current.value
+                        }
 
-            return fetch("http://127.0.0.1:8088/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(newUser)
-            })
-                .then(res => res.json())
-                .then(res => {
-                    if ("valid" in res && res.valid) {
-                        localStorage.setItem("rare_user_id", parseInt(res.id))
-                        history.push("/")
-                    }
+                        return fetch("http://127.0.0.1:8088/register", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Accept": "application/json"
+                            },
+                            body: JSON.stringify(newUser)
+                        })
+                            .then(res => res.json())
+                            .then(res => {
+                                if ("valid" in res && res.valid) {
+                                    localStorage.setItem("rare_user_id", parseInt(res.id))
+                                    history.push("/")
+                                }
                 })
-        } else {
-            passwordDialog.current.showModal()
+        } 
+        else {
+            conflictDialog.current.showModal()
         }
+        })
+    } else {
+        passwordDialog.current.showModal()
+    }
     }
 
     return (
@@ -50,6 +71,11 @@ export const Register = (props) => {
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Passwords do not match</div>
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
+            </dialog>
+
+            <dialog className="dialog dialog--password" ref={conflictDialog}>
+                <div>Account with that email address already exists</div>
+                <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
             <form className="form--login" onSubmit={handleRegister}>
