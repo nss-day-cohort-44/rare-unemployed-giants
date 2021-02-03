@@ -32,7 +32,6 @@ export const CommentProvider = (props) => {
         return fetch(`http://localhost:8088/comments/${id}`, {
           method: "DELETE",
         })
-          .then(res => res.json())
           .then(getComments)
       };
 
@@ -44,7 +43,7 @@ export const CommentProvider = (props) => {
     */
     return (
         <CommentContext.Provider value={{
-            comments, getComments, createComment
+            comments, getComments, createComment, deleteComment
         }}>
             {props.children}
         </CommentContext.Provider>
