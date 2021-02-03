@@ -17,7 +17,7 @@ export const TagList = (props) => {
 
         if (userChoice) {
             deleteTag(tag.id)
-            props.history.push(`/`)
+            props.history.push(`/tags`)
         }
         else {
             // Pass
