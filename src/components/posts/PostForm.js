@@ -1,12 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import { PostContext } from "./PostProvider";
-import { UserContext } from "../users/UserProvider";
 import { CategoryContext } from "../categories/CategoryProvider.js";
-import { HumanDate } from "../utils/HumanDate.js";
 
 export const PostForm = (props) => {
-  const { posts, createPost, getPosts } = useContext(PostContext);
-  // const { user, getUserById } = useContext(UserContext);
+  const { createPost, getPosts } = useContext(PostContext);
   const { categories, getCategories } = useContext(CategoryContext);
   const [post, setPost] = useState({});
 
@@ -21,20 +18,23 @@ export const PostForm = (props) => {
   };
 
   useEffect(() => {
-    getCategories();
-  }, []);
-  useEffect(() => {
-    getPosts();
+    getCategories().then(getPosts);
   }, []);
 
   const user = parseInt(localStorage.getItem("rare_user_id"));
+
   const createNewPost = () => {
     const categoryId = parseInt(categories.id);
+    //grabs current time in seconds since January 1970 and converts that into human readable format
+    const timeElapsed = Date.now()
+    const now = new Date(timeElapsed)
+    const readableTime = now.toDateString()
+
     createPost({
       user_id: parseInt(localStorage.getItem("rare_user_id")),
       category_id: categoryId,
       title: post.title,
-      publication_date: "2021-01-29 09:19:32.619755",
+      publication_date: readableTime,
       content: post.content,
       image_url: post.imageUrl,
       approved: 1,

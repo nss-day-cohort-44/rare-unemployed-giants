@@ -24,6 +24,7 @@ export const Login = () => {
     })
       .then((res) => res.json())
       .then((res) => {
+        //if valid key is on response json and evaluates to true, set the rare_user_id as response.id and log user in, going to homepage
         if ("valid" in res && res.valid) {
           localStorage.setItem("rare_user_id", res.id);
           history.push("/");

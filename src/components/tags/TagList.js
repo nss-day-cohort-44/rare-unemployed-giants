@@ -1,12 +1,9 @@
 import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { TagContext } from "./TagProvider";
-import { useHistory } from "react-router-dom"
-import "./Tag.css"
 
 export const TagList = (props) => {
     const { tags, getTags, deleteTag } = useContext(TagContext)
-    const { history } = useHistory();
 
     useEffect(() => {
         getTags()
@@ -18,9 +15,6 @@ export const TagList = (props) => {
         if (userChoice) {
             deleteTag(tag.id)
             props.history.push(`/tags`)
-        }
-        else {
-            // Pass
         }
     }
 

@@ -37,6 +37,7 @@ export const NavBar = () => {
           My Posts
         </Link>
       </li>
+      {/* Handles logout by wiping the current rare_user_id from localStorage */}
       {localStorage.getItem("rare_user_id") !== null ? (
         <li className="nav-item">
           <button
