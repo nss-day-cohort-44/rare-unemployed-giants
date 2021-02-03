@@ -3,10 +3,7 @@ import { PostContext } from "./PostProvider";
 
 export const PostDetail = (props) => {
 
-    const {
-        getPostById,
-        deletePost
-    } = useContext(PostContext);
+    const { getPostById, deletePost } = useContext(PostContext);
 
     const [post, setPost] = useState({});
 
@@ -29,9 +26,6 @@ export const PostDetail = (props) => {
             deletePost(post.id)
             props.history.push('/')
         }
-        else {
-            // Pass
-        }
     }
 
     const seeComments = () => {
@@ -53,6 +47,10 @@ export const PostDetail = (props) => {
                     props.history.push(`/commentForm/${props.match.params.postId}`)
                 }}> Make Comment </button>
 
+
+                {/* Checks if currentUser is the same as userId associated with the post, and if so shows the delete button.
+                Makes it so that only the author of a post can delete it
+                */}
                 {currentUser === post.userId ? <button onClick={() => {
                     confirmDelete()
                 }}> Delete Post </button> : ""}

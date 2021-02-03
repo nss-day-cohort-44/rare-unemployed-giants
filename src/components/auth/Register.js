@@ -6,7 +6,6 @@ export const Register = (props) => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
-    const bio = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
@@ -18,6 +17,7 @@ export const Register = (props) => {
         return fetch(`http://127.0.0.1:8088/users?email=${email.current.value}`)
             .then(_ => _.json())
             .then((user) => {
+                //If the  user response has an email, return true.  else return false.
                 if (user.email != "") { return true }
                 else { return false }
             })
@@ -28,6 +28,7 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             existingUserCheck()
+            //If a user does not exist, create a new user and post it to the database, logging them in.
                 .then((userExists) => {
                     if (!userExists) {
                         const newUser = {
@@ -49,6 +50,7 @@ export const Register = (props) => {
                             .then(res => res.json())
                             .then(res => {
                                 if ("valid" in res && res.valid) {
+                                    //Sets the rare_user_id local storage as the response's id
                                     localStorage.setItem("rare_user_id", parseInt(res.id))
                                     history.push("/")
                                 }

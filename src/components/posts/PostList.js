@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { PostContext } from "./PostProvider";
 import { Post } from "./Post";
-import "./PostList.css";
 
 export const PostList = (props) => {
   const { posts, getPosts, getPostsByUser } = useContext(PostContext);
@@ -9,18 +8,18 @@ export const PostList = (props) => {
   const user = parseInt(localStorage.getItem("rare_user_id"));
   const viewingUserPosts = props.match.params.hasOwnProperty("user_id");
 
+  //Checks to see if match.params has the property "user_id", and if so only shows posts of logged in user, otherwise shows all
   useEffect(() => {
     if (viewingUserPosts) {
-      console.log("test");
       getPostsByUser(user);
     } else {
       getPosts();
     }
   }, []);
 
+  //Watches to see if match.params changes, and then retries the code to either get all posts or only the current user's accordingly
   useEffect(() => {
     if (viewingUserPosts) {
-      console.log("taco");
       getPostsByUser(user);
     } else {
       getPosts();

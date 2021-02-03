@@ -1,5 +1,4 @@
 import React, { useRef } from "react"
-import "./Tag.css"
 
 export const TagForm = (props) => {
 
@@ -34,7 +33,7 @@ export const TagForm = (props) => {
                 <h1>Please Enter a New Tag</h1>
             </div>
 
-            <form className="form--createTag" onSubmit={handleSubmit}>
+            <form className="form--createTag">
 
                 <input ref={tagLabel} type="text" name="newTag" className="form-control"
                     placeholder="Tag name" required autoFocus />

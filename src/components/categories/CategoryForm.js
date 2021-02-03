@@ -5,7 +5,6 @@ that they can add a new category to the database via DOM interaction.
 */
 
 import React, { useRef } from "react"
-import "./CategoryForm.css"
 
 export const CategoryForm = (props) => {
 

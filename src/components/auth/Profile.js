@@ -4,6 +4,7 @@ import { HumanDate } from "../utils/HumanDate.js"
 import { ProfileContext } from "./AuthProvider.js"
 import "./Profile.css"
 
+//Do we actually use any of this?  We don't think so.
 
 export const Profile = (props) => {
     const { profile, getProfile } = useContext(ProfileContext)
